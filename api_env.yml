@@ -1,0 +1,12 @@
+name: api-env
+dependencies:
+  - python
+  - flask
+  - sqlite
+  - requests
+  - numpy
+  - pandas
+  - selenium=3.141.0*
+channels:
+  - defaults
+  - anaconda

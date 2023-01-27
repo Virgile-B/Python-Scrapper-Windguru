@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>
+        	
+        	Windfinder API - data display 
+
+        </title>
+    </head>
+
+    <body>
+		<div class="p-5" style="
+			background-image: url('https://www.cycloneoi.com/medias/images/windy-12.jpg');
+			background-size: cover;
+  			background-position: center;
+  			background-repeat: no-repeat;
+			"
+		>
+			<div class="container p-5 bg-light bg-gradient-secondary rounded-lg">
+				<h1 class="text-center text-bold">Windfinder API</h1>
+				<h2 class="text-center text-bold">Le Porge</h2>
+			</div>
+			
+			<div class="container bg-light rounded-lg">
+				<div class="mt-5 p-2 bg-gradient-secondary">
+					<ul class="nav nav-tabs m-2">
+						<li class="nav-item">
+							<a class="nav-link" href="/">Home</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="/dashboard">Dashboard</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link active" href="/data">Data</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="/webscraper">Webscraping</a>
+						</li>
+					</ul>
+					<form class="form-row mb-4 p-3" method="post" action="/data">
+						<div class="col-md-6 mb-3">
+							<label for="start-date">Start date</label>
+							<input type="text" class="form-control {% if not is_valid %}is-invalid{% endif %}" 
+							id="start-date" name="start-date" value="{% if dates %}{{ dates['start-date'] }}{% endif %}" required
+							>
+							<div class="invalid-feedback">
+								  Wrong format
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="end-date">End date</label>
+							<input type="text" class="form-control {% if not is_valid %}is-invalid{% endif %}" 
+							id="end-date" name="end-date" value="{% if dates %}{{ dates['end-date'] }}{% endif %}" required
+							>
+							<div class="invalid-feedback">
+								Wrong format
+							</div>
+						</div>
+						<div class="col-md-6 mb-3 mt-1">
+							<button type="submit" class="btn btn-primary mr-4" value="True" name="search-form">Search</button>
+						</div>
+						<div class="form-check mt-1">
+							<input class="form-check-input" type="checkbox" name="export" value="True" id="flexCheckExport" />
+							<label class="form-check-label" for="flexCheckExport">Export data as a csv</label>
+						</div>
+
+					</form>
+					{% if table %}
+						{% block content %}
+						<div class="table-responsive" style="position: relative; height: 700px; overflow: auto;">
+							<table class="table table-striped">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">date</th>
+										<th scope="col">hour</th>
+										<th scope="col">water temperature</th>
+										<th scope="col">wind speed</th>
+										<th scope="col">wind direction</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for data in table %}
+									<tr>
+										<th scope="row">{{ data["date"] }}</th>
+										<th scope="row">{{ data["hour"] }}</th>
+										<th scope="row">{{ data["temperature"] }}</th>
+										<th scope="row">{{ data["speed"] }}</th>
+										<th scope="row">{{ data["direction"] }}</th>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						{% endblock %}
+					{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer mt-auto py-3 bg-light">
+			<div class="container">
+				<span class="text-muted"> Master 203 - webscraper project</span>
+			</div>
+		</footer>
+		
+
+    </body>
+</html>

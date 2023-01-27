@@ -1,0 +1,7 @@
+python
+flask
+sqlite
+requests
+numpy
+pandas
+selenium==4.3.0

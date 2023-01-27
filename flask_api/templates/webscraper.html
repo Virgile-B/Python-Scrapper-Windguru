@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<title>
+        	
+        	Windfinder API - data display 
+
+        </title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script>
+			function set_progress(){
+				$.get("/webscraper/progress", function(data){
+					document.querySelector(".progress-bar").style.width = data + "%";
+					setTimeout(set_progress, 2000);
+				});
+			};
+			document.onload(set_progress);
+		</script>
+    </head>
+    <body>
+		<div class="p-5" style="
+			background-image: url('https://www.cycloneoi.com/medias/images/windy-12.jpg');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			height: 100vh;
+			"
+		>
+			<div class="container p-5 bg-light bg-gradient-secondary rounded-lg">
+				<h1 class="text-center text-bold">Windfinder API</h1>
+				<h2 class="text-center text-bold">Le Porge</h2>
+			</div>
+			
+			<div class="container bg-light rounded-lg">
+				<div class="mt-5 p-2 bg-gradient-secondary">
+					<ul class="nav nav-tabs m-2">
+						<li class="nav-item">
+							<a class="nav-link" href="/">Home</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="/dashboard">Dashboard</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="/data">Data</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link active" href="/webscraper">Webscraping</a>
+						</li>
+					</ul>
+					<form onsubmit="setTimeout(set_progress, 1000);" method="post" action="/webscraper">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Webscrap website</label>
+							<small id="emailHelp" class="form-text text-muted">This may take time to complete (~3 min)</small>
+						  </div>
+						<button type="submit" class="btn btn-primary" value="True" data-bs-toggle="modal" data-bs-target="#exampleModal" name="webscrap_website">Execute</button>
+					</form>
+				</div>
+				<div class="container pb-3">
+					<div class="progress mt-3">
+						<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="exampleModalLabel"><p class="text-center text-danger fw-bold">Do not close the window</p></h5>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		<footer class="footer mt-auto py-3 bg-light">
+			<div class="container">
+				<span class="text-muted"> Master 203 - webscraper project</span>
+			</div>
+		</footer>
+    </body>
+</html>
