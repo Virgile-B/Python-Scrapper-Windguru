@@ -20,4 +20,3 @@ There are few steps that need to be done as prerequisites in order to run the co
         
 As an additional feature, you are able to execute SQL queries in the test_sql.ipynb file. For instance, you are able to execute queries and filter the data based on some parameters such as the wind speed or the temperature.
 # Python-Scrapper-Windguru
-# Python-Scrapper-Windguru
